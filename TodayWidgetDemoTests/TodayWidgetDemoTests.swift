@@ -3,7 +3,7 @@
 //  TodayWidgetDemoTests
 //
 //  Created by Bob Wakefield on 1/4/20.
-//  Copyright © 2020 Bob Wakefield. All rights reserved.
+//  Copyright © 2020 Cockleburr Software. All rights reserved.
 //
 
 import XCTest

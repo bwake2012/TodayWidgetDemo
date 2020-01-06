@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -14,6 +14,14 @@
 		C4D1C74323C0F6B500F31911 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4D1C74223C0F6B500F31911 /* Assets.xcassets */; };
 		C4D1C74623C0F6B500F31911 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4D1C74423C0F6B500F31911 /* LaunchScreen.storyboard */; };
 		C4D1C75123C0F6B500F31911 /* TodayWidgetDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D1C75023C0F6B500F31911 /* TodayWidgetDemoTests.swift */; };
+		C4D1C76223C0FEE300F31911 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4D1C76123C0FEE300F31911 /* NotificationCenter.framework */; };
+		C4D1C76523C0FEE300F31911 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D1C76423C0FEE300F31911 /* TodayViewController.swift */; };
+		C4D1C76823C0FEE300F31911 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4D1C76623C0FEE300F31911 /* MainInterface.storyboard */; };
+		C4D1C76C23C0FEE300F31911 /* Today Widget Demo Widget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = C4D1C75F23C0FEE300F31911 /* Today Widget Demo Widget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		C4D1C77423C101E600F31911 /* TodayWidgetContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D1C77323C101E600F31911 /* TodayWidgetContent.swift */; };
+		C4D1C77523C104A400F31911 /* TodayWidgetContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D1C77323C101E600F31911 /* TodayWidgetContent.swift */; };
+		C4D1C77823C2840900F31911 /* SharedContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D1C77723C2840900F31911 /* SharedContent.swift */; };
+		C4D1C77923C2879A00F31911 /* SharedContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D1C77723C2840900F31911 /* SharedContent.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -24,10 +32,31 @@
 			remoteGlobalIDString = C4D1C73523C0F6B100F31911;
 			remoteInfo = TodayWidgetDemo;
 		};
+		C4D1C76A23C0FEE300F31911 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C4D1C72E23C0F6B100F31911 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C4D1C75E23C0FEE300F31911;
+			remoteInfo = TodayWidgetDemoWidget;
+		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		C4D1C77023C0FEE300F31911 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				C4D1C76C23C0FEE300F31911 /* Today Widget Demo Widget.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		C4D1C73623C0F6B100F31911 /* TodayWidgetDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TodayWidgetDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C4D1C73623C0F6B100F31911 /* Today Widget Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Today Widget Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4D1C73923C0F6B100F31911 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C4D1C73B23C0F6B100F31911 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		C4D1C73D23C0F6B100F31911 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -38,6 +67,15 @@
 		C4D1C74C23C0F6B500F31911 /* TodayWidgetDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TodayWidgetDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4D1C75023C0F6B500F31911 /* TodayWidgetDemoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayWidgetDemoTests.swift; sourceTree = "<group>"; };
 		C4D1C75223C0F6B500F31911 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C4D1C75F23C0FEE300F31911 /* Today Widget Demo Widget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Today Widget Demo Widget.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C4D1C76123C0FEE300F31911 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
+		C4D1C76423C0FEE300F31911 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
+		C4D1C76723C0FEE300F31911 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		C4D1C76923C0FEE300F31911 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C4D1C77123C1007B00F31911 /* TodayWidgetDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TodayWidgetDemo.entitlements; sourceTree = "<group>"; };
+		C4D1C77223C100F400F31911 /* TodayWidgetDemoWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TodayWidgetDemoWidget.entitlements; sourceTree = "<group>"; };
+		C4D1C77323C101E600F31911 /* TodayWidgetContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayWidgetContent.swift; sourceTree = "<group>"; };
+		C4D1C77723C2840900F31911 /* SharedContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedContent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,14 +93,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C4D1C75C23C0FEE300F31911 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C4D1C76223C0FEE300F31911 /* NotificationCenter.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		C4D1C72D23C0F6B100F31911 = {
 			isa = PBXGroup;
 			children = (
+				C4D1C77623C104BD00F31911 /* Common */,
 				C4D1C73823C0F6B100F31911 /* TodayWidgetDemo */,
 				C4D1C74F23C0F6B500F31911 /* TodayWidgetDemoTests */,
+				C4D1C76323C0FEE300F31911 /* TodayWidgetDemoWidget */,
+				C4D1C76023C0FEE300F31911 /* Frameworks */,
 				C4D1C73723C0F6B100F31911 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -70,8 +119,9 @@
 		C4D1C73723C0F6B100F31911 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C4D1C73623C0F6B100F31911 /* TodayWidgetDemo.app */,
+				C4D1C73623C0F6B100F31911 /* Today Widget Demo.app */,
 				C4D1C74C23C0F6B500F31911 /* TodayWidgetDemoTests.xctest */,
+				C4D1C75F23C0FEE300F31911 /* Today Widget Demo Widget.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -79,6 +129,7 @@
 		C4D1C73823C0F6B100F31911 /* TodayWidgetDemo */ = {
 			isa = PBXGroup;
 			children = (
+				C4D1C77123C1007B00F31911 /* TodayWidgetDemo.entitlements */,
 				C4D1C73923C0F6B100F31911 /* AppDelegate.swift */,
 				C4D1C73B23C0F6B100F31911 /* SceneDelegate.swift */,
 				C4D1C73D23C0F6B100F31911 /* ViewController.swift */,
@@ -99,6 +150,34 @@
 			path = TodayWidgetDemoTests;
 			sourceTree = "<group>";
 		};
+		C4D1C76023C0FEE300F31911 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C4D1C76123C0FEE300F31911 /* NotificationCenter.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C4D1C76323C0FEE300F31911 /* TodayWidgetDemoWidget */ = {
+			isa = PBXGroup;
+			children = (
+				C4D1C77223C100F400F31911 /* TodayWidgetDemoWidget.entitlements */,
+				C4D1C76423C0FEE300F31911 /* TodayViewController.swift */,
+				C4D1C76623C0FEE300F31911 /* MainInterface.storyboard */,
+				C4D1C76923C0FEE300F31911 /* Info.plist */,
+			);
+			path = TodayWidgetDemoWidget;
+			sourceTree = "<group>";
+		};
+		C4D1C77623C104BD00F31911 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				C4D1C77723C2840900F31911 /* SharedContent.swift */,
+				C4D1C77323C101E600F31911 /* TodayWidgetContent.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -109,14 +188,16 @@
 				C4D1C73223C0F6B100F31911 /* Sources */,
 				C4D1C73323C0F6B100F31911 /* Frameworks */,
 				C4D1C73423C0F6B100F31911 /* Resources */,
+				C4D1C77023C0FEE300F31911 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				C4D1C76B23C0FEE300F31911 /* PBXTargetDependency */,
 			);
 			name = TodayWidgetDemo;
 			productName = TodayWidgetDemo;
-			productReference = C4D1C73623C0F6B100F31911 /* TodayWidgetDemo.app */;
+			productReference = C4D1C73623C0F6B100F31911 /* Today Widget Demo.app */;
 			productType = "com.apple.product-type.application";
 		};
 		C4D1C74B23C0F6B500F31911 /* TodayWidgetDemoTests */ = {
@@ -137,6 +218,23 @@
 			productReference = C4D1C74C23C0F6B500F31911 /* TodayWidgetDemoTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		C4D1C75E23C0FEE300F31911 /* TodayWidgetDemoWidget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C4D1C76D23C0FEE300F31911 /* Build configuration list for PBXNativeTarget "TodayWidgetDemoWidget" */;
+			buildPhases = (
+				C4D1C75B23C0FEE300F31911 /* Sources */,
+				C4D1C75C23C0FEE300F31911 /* Frameworks */,
+				C4D1C75D23C0FEE300F31911 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TodayWidgetDemoWidget;
+			productName = TodayWidgetDemoWidget;
+			productReference = C4D1C75F23C0FEE300F31911 /* Today Widget Demo Widget.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -145,7 +243,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 1130;
 				LastUpgradeCheck = 1130;
-				ORGANIZATIONNAME = "Bob Wakefield";
+				ORGANIZATIONNAME = "Cockleburr Software";
 				TargetAttributes = {
 					C4D1C73523C0F6B100F31911 = {
 						CreatedOnToolsVersion = 11.3;
@@ -154,10 +252,13 @@
 						CreatedOnToolsVersion = 11.3;
 						TestTargetID = C4D1C73523C0F6B100F31911;
 					};
+					C4D1C75E23C0FEE300F31911 = {
+						CreatedOnToolsVersion = 11.3;
+					};
 				};
 			};
 			buildConfigurationList = C4D1C73123C0F6B100F31911 /* Build configuration list for PBXProject "TodayWidgetDemo" */;
-			compatibilityVersion = "Xcode 9.3";
+			compatibilityVersion = "Xcode 11.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -171,6 +272,7 @@
 			targets = (
 				C4D1C73523C0F6B100F31911 /* TodayWidgetDemo */,
 				C4D1C74B23C0F6B500F31911 /* TodayWidgetDemoTests */,
+				C4D1C75E23C0FEE300F31911 /* TodayWidgetDemoWidget */,
 			);
 		};
 /* End PBXProject section */
@@ -193,6 +295,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C4D1C75D23C0FEE300F31911 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C4D1C76823C0FEE300F31911 /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -202,7 +312,9 @@
 			files = (
 				C4D1C73E23C0F6B100F31911 /* ViewController.swift in Sources */,
 				C4D1C73A23C0F6B100F31911 /* AppDelegate.swift in Sources */,
+				C4D1C77823C2840900F31911 /* SharedContent.swift in Sources */,
 				C4D1C73C23C0F6B100F31911 /* SceneDelegate.swift in Sources */,
+				C4D1C77423C101E600F31911 /* TodayWidgetContent.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -214,6 +326,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C4D1C75B23C0FEE300F31911 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C4D1C76523C0FEE300F31911 /* TodayViewController.swift in Sources */,
+				C4D1C77923C2879A00F31911 /* SharedContent.swift in Sources */,
+				C4D1C77523C104A400F31911 /* TodayWidgetContent.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -221,6 +343,11 @@
 			isa = PBXTargetDependency;
 			target = C4D1C73523C0F6B100F31911 /* TodayWidgetDemo */;
 			targetProxy = C4D1C74D23C0F6B500F31911 /* PBXContainerItemProxy */;
+		};
+		C4D1C76B23C0FEE300F31911 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C4D1C75E23C0FEE300F31911 /* TodayWidgetDemoWidget */;
+			targetProxy = C4D1C76A23C0FEE300F31911 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -239,6 +366,14 @@
 				C4D1C74523C0F6B500F31911 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		C4D1C76623C0FEE300F31911 /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C4D1C76723C0FEE300F31911 /* Base */,
+			);
+			name = MainInterface.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -361,7 +496,9 @@
 		C4D1C75623C0F6B500F31911 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = TodayWidgetDemo/TodayWidgetDemo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8G7W6WCEM9;
 				INFOPLIST_FILE = TodayWidgetDemo/Info.plist;
@@ -370,7 +507,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = net.cockleburr.TodayWidgetDemo;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Today Widget Demo";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -379,7 +516,9 @@
 		C4D1C75723C0F6B500F31911 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = TodayWidgetDemo/TodayWidgetDemo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8G7W6WCEM9;
 				INFOPLIST_FILE = TodayWidgetDemo/Info.plist;
@@ -388,7 +527,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = net.cockleburr.TodayWidgetDemo;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Today Widget Demo";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -438,6 +577,46 @@
 			};
 			name = Release;
 		};
+		C4D1C76E23C0FEE300F31911 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = TodayWidgetDemoWidget/TodayWidgetDemoWidget.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8G7W6WCEM9;
+				INFOPLIST_FILE = TodayWidgetDemoWidget/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = net.cockleburr.TodayWidgetDemo.TodayWidgetDemoWidget;
+				PRODUCT_NAME = "Today Widget Demo Widget";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		C4D1C76F23C0FEE300F31911 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = TodayWidgetDemoWidget/TodayWidgetDemoWidget.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8G7W6WCEM9;
+				INFOPLIST_FILE = TodayWidgetDemoWidget/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = net.cockleburr.TodayWidgetDemo.TodayWidgetDemoWidget;
+				PRODUCT_NAME = "Today Widget Demo Widget";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -464,6 +643,15 @@
 			buildConfigurations = (
 				C4D1C75923C0F6B500F31911 /* Debug */,
 				C4D1C75A23C0F6B500F31911 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C4D1C76D23C0FEE300F31911 /* Build configuration list for PBXNativeTarget "TodayWidgetDemoWidget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C4D1C76E23C0FEE300F31911 /* Debug */,
+				C4D1C76F23C0FEE300F31911 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
