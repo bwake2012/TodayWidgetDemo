@@ -15,10 +15,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="32"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="750" verticalCompressionResistancePriority="1000" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="128" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Sq9-81-ycH">
-                                <rect key="frame" x="0.0" y="44" width="320" height="128"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="750" verticalCompressionResistancePriority="1000" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="128" showsHorizontalScrollIndicator="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Sq9-81-ycH">
+                                <rect key="frame" x="16" y="44" width="288" height="128"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="128" id="B9q-aM-fkh"/>
+                                </constraints>
                                 <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -29,10 +32,10 @@
                             </textView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="ssy-KU-ocm" firstAttribute="trailing" secondItem="Sq9-81-ycH" secondAttribute="trailing" id="9lq-tz-8Y3"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Sq9-81-ycH" secondAttribute="trailing" id="9lq-tz-8Y3"/>
                             <constraint firstAttribute="bottom" secondItem="Sq9-81-ycH" secondAttribute="bottom" id="Le2-qQ-cca"/>
                             <constraint firstItem="ssy-KU-ocm" firstAttribute="top" secondItem="Sq9-81-ycH" secondAttribute="top" id="PMR-rd-Cbj"/>
-                            <constraint firstItem="Sq9-81-ycH" firstAttribute="leading" secondItem="ssy-KU-ocm" secondAttribute="leading" id="kJT-Ra-PCq"/>
+                            <constraint firstItem="Sq9-81-ycH" firstAttribute="leading" secondItem="S3S-Oj-5AN" secondAttribute="leadingMargin" id="kJT-Ra-PCq"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ssy-KU-ocm"/>
                     </view>
@@ -40,6 +43,7 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="32"/>
                     <connections>
+                        <outlet property="contentHeightConstraint" destination="B9q-aM-fkh" id="4tC-rg-5G5"/>
                         <outlet property="todayContent" destination="Sq9-81-ycH" id="7We-9Q-hQ2"/>
                     </connections>
                 </viewController>

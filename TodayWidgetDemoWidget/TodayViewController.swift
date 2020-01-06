@@ -12,8 +12,18 @@ import NotificationCenter
 class TodayViewController: UIViewController, NCWidgetProviding {
         
     @IBOutlet weak var todayContent: UITextView!
+    @IBOutlet weak var contentHeightConstraint: NSLayoutConstraint!
 
     let content = TodayWidgetContent()
+
+    @IBAction func didTap(_ sender: UITapGestureRecognizer) {
+
+        guard let url = URL(string: "todayWidgetDemo://home") else {
+            return
+        }
+
+        extensionContext?.open(url, completionHandler: nil)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,16 +42,17 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         let newText = content.text
 
         todayContent.text = newText
-        
+        let contentSize = todayContent.sizeThatFits(CGSize(width: todayContent.bounds.width, height: CGFloat.greatestFiniteMagnitude))
+        self.preferredContentSize = contentSize
+        contentHeightConstraint.constant = contentSize.height
+
         completionHandler(newText != oldText ? NCUpdateResult.newData : NCUpdateResult.noData)
     }
     
-    @IBAction func didTap(_ sender: UITapGestureRecognizer) {
+    func widgetActiveDisplayModeDidChange(_ activeDisplayMode: NCWidgetDisplayMode, withMaximumSize maxSize: CGSize) {
 
-        guard let url = URL(string: "todayWidgetDemo://home") else {
-            return
-        }
+        let contentSize = todayContent.sizeThatFits(CGSize(width: todayContent.bounds.width, height: CGFloat.greatestFiniteMagnitude))
 
-        extensionContext?.open(url, completionHandler: nil)
+        self.preferredContentSize = contentSize
     }
 }
