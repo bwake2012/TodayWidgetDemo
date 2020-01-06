@@ -18,10 +18,14 @@
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="750" verticalCompressionResistancePriority="1000" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="128" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Sq9-81-ycH">
                                 <rect key="frame" x="0.0" y="44" width="320" height="128"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <gestureRecognizers/>
                                 <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES" calendarEvent="YES" shipmentTrackingNumber="YES" flightNumber="YES"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="UUj-ME-0me" appends="YES" id="D8f-XS-zQA"/>
+                                </connections>
                             </textView>
                         </subviews>
                         <constraints>
@@ -40,6 +44,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vXp-U4-Rya" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="UUj-ME-0me">
+                    <connections>
+                        <action selector="didTap:" destination="M4Y-Lb-cyx" id="oKd-Q4-AdN"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="139" y="102"/>
         </scene>

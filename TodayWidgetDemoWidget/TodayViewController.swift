@@ -28,8 +28,20 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         // If an error is encountered, use NCUpdateResult.Failed
         // If there's no update required, use NCUpdateResult.NoData
         // If there's an update, use NCUpdateResult.NewData
+        let oldText = todayContent.text
+        let newText = content.text
+
+        todayContent.text = newText
         
-        completionHandler(NCUpdateResult.newData)
+        completionHandler(newText != oldText ? NCUpdateResult.newData : NCUpdateResult.noData)
     }
     
+    @IBAction func didTap(_ sender: UITapGestureRecognizer) {
+
+        guard let url = URL(string: "todayWidgetDemo://home") else {
+            return
+        }
+
+        extensionContext?.open(url, completionHandler: nil)
+    }
 }
