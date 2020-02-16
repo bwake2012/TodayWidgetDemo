@@ -11,10 +11,11 @@ import NotificationCenter
 
 class TodayViewController: UIViewController, NCWidgetProviding {
         
-    @IBOutlet weak var todayContent: UITextView!
-    @IBOutlet weak var contentHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var pokemonSpeciesName: UILabel?
+    @IBOutlet weak var pokemonImage: UIImageView?
 
-    let content = TodayWidgetContent()
+    let sharedJSON = SharedJSON(appGroupIdentifier: CommonConstants.appGroupIdentifier, path: CommonConstants.demoContentPokemonJSON)
+    let sharedPNG = SharedPNG(appGroupIdentifier: CommonConstants.appGroupIdentifier, path: CommonConstants.demoContentPokemonImage)
 
     @IBAction func didTap(_ sender: UITapGestureRecognizer) {
 
@@ -29,7 +30,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
 
-        todayContent.text = content.text
+
     }
         
     func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
@@ -38,21 +39,38 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         // If an error is encountered, use NCUpdateResult.Failed
         // If there's no update required, use NCUpdateResult.NoData
         // If there's an update, use NCUpdateResult.NewData
-        let oldText = todayContent.text
-        let newText = content.text
+        let oldText = pokemonSpeciesName?.text ?? ""
+        var completionResult = false
 
-        todayContent.text = newText
-        let contentSize = todayContent.sizeThatFits(CGSize(width: todayContent.bounds.width, height: CGFloat.greatestFiniteMagnitude))
-        self.preferredContentSize = contentSize
-        contentHeightConstraint.constant = contentSize.height
+        let result: Result<Pokemon, Error> = sharedJSON.getObject()
+        switch result {
+        case .failure(_):
+            break
+        case .success(let pokemon):
+            pokemonSpeciesName?.text = pokemon.species.name
+            completionResult = oldText != pokemon.species.name
+            let result = sharedPNG.getImage()
+            switch result {
+            case .failure(_):
+                break
+            case .success(let image):
+                pokemonImage?.image = image
+            }
+        }
 
-        completionHandler(newText != oldText ? NCUpdateResult.newData : NCUpdateResult.noData)
+        completionHandler(completionResult ? NCUpdateResult.newData : NCUpdateResult.noData)
     }
     
     func widgetActiveDisplayModeDidChange(_ activeDisplayMode: NCWidgetDisplayMode, withMaximumSize maxSize: CGSize) {
 
-        let contentSize = todayContent.sizeThatFits(CGSize(width: todayContent.bounds.width, height: CGFloat.greatestFiniteMagnitude))
+        switch activeDisplayMode {
 
-        self.preferredContentSize = contentSize
+        case .compact:
+            preferredContentSize = maxSize
+        case .expanded:
+            preferredContentSize = maxSize
+        @unknown default:
+            fatalError("Unexpected today widget active display mode")
+        }
     }
 }

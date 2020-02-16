@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -10,53 +11,63 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="TodayWidgetDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Today_Widget_Demo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Today Widget Demo" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OiG-Rs-EPZ">
-                                <rect key="frame" x="20" y="44" width="394" height="41"/>
+                                <rect key="frame" x="20" y="44" width="374" height="41"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="249" placeholderIntrinsicWidth="374" placeholderIntrinsicHeight="256" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="haf-4V-xAo">
-                                <rect key="frame" x="20" y="93" width="374" height="285"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d9g-hC-EBJ">
-                                <rect key="frame" x="20" y="385" width="374" height="33"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="XdF-yB-3SH">
+                                <rect key="frame" x="20" y="93" width="374" height="374"/>
+                                <color key="backgroundColor" systemColor="systemFillColor" red="0.47058823529999999" green="0.47058823529999999" blue="0.50196078430000002" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="XdF-yB-3SH" secondAttribute="height" multiplier="1:1" id="stj-Vh-mGB"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qOi-SN-sAD">
+                                <rect key="frame" x="20" y="475" width="374" height="0.0"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                <state key="normal" title="Display to Today Widget"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="Doj-Ci-atc">
+                                <rect key="frame" x="110" y="507" width="194" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="aOT-xS-w6o"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                <state key="normal" title="Fetch Random Pokémon"/>
                                 <connections>
-                                    <action selector="displayContentTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nhA-FG-HQf"/>
+                                    <action selector="fetchPokemon:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Wp4-0q-ctO"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="OiG-Rs-EPZ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="0hu-rV-mCm"/>
-                            <constraint firstItem="haf-4V-xAo" firstAttribute="top" secondItem="OiG-Rs-EPZ" secondAttribute="bottom" constant="8" id="9Bj-4H-eSB"/>
-                            <constraint firstItem="OiG-Rs-EPZ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="CyD-vI-F7h"/>
-                            <constraint firstItem="haf-4V-xAo" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="DHh-Pg-rDY"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="OiG-Rs-EPZ" secondAttribute="trailing" constant="-20" id="FLN-0v-Gfr"/>
-                            <constraint firstItem="d9g-hC-EBJ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="Ke1-At-RVW"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" relation="lessThanOrEqual" secondItem="d9g-hC-EBJ" secondAttribute="bottom" constant="444" id="Nqa-eN-2Zr"/>
-                            <constraint firstItem="d9g-hC-EBJ" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" priority="998" id="OT3-lI-ItQ"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="haf-4V-xAo" secondAttribute="trailing" id="cXt-je-0Y4"/>
-                            <constraint firstItem="d9g-hC-EBJ" firstAttribute="leading" relation="lessThanOrEqual" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="eAH-qK-vBS"/>
-                            <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="d9g-hC-EBJ" secondAttribute="trailing" id="tJ6-uZ-kmg"/>
-                            <constraint firstItem="d9g-hC-EBJ" firstAttribute="top" secondItem="haf-4V-xAo" secondAttribute="bottom" constant="7" id="ymd-vL-3uL"/>
+                            <constraint firstItem="XdF-yB-3SH" firstAttribute="top" secondItem="OiG-Rs-EPZ" secondAttribute="bottom" constant="8" symbolic="YES" id="BJN-gq-e43"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="OiG-Rs-EPZ" secondAttribute="trailing" id="FLN-0v-Gfr"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="XdF-yB-3SH" secondAttribute="trailing" id="FOd-P7-tYK"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="qOi-SN-sAD" secondAttribute="trailing" id="HQE-V0-qFW"/>
+                            <constraint firstItem="qOi-SN-sAD" firstAttribute="top" secondItem="XdF-yB-3SH" secondAttribute="bottom" constant="8" symbolic="YES" id="SyP-fv-xVf"/>
+                            <constraint firstItem="OiG-Rs-EPZ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="XY6-zQ-wmL"/>
+                            <constraint firstItem="Doj-Ci-atc" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="e3m-cM-GaX"/>
+                            <constraint firstItem="Doj-Ci-atc" firstAttribute="top" secondItem="qOi-SN-sAD" secondAttribute="bottom" constant="32" id="gAs-fZ-ckJ"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Doj-Ci-atc" secondAttribute="trailing" id="hnk-l5-8Fw"/>
+                            <constraint firstItem="qOi-SN-sAD" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="hwb-ve-6pY"/>
+                            <constraint firstItem="XdF-yB-3SH" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="ieZ-p4-2rC"/>
+                            <constraint firstItem="Doj-Ci-atc" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="waF-U7-vPW"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <outlet property="todayContent" destination="haf-4V-xAo" id="dzw-28-p3P"/>
+                        <outlet property="pokemonImage" destination="XdF-yB-3SH" id="T8X-nu-12H"/>
+                        <outlet property="pokemonSpecies" destination="qOi-SN-sAD" id="e4C-R6-R1I"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

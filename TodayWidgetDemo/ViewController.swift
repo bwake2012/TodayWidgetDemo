@@ -8,24 +8,65 @@
 
 import UIKit
 
+import NotificationCenter
+
 class ViewController: UIViewController {
 
-    fileprivate var todayWidgetContent = TodayWidgetContent()
+    fileprivate let sharedJSON = SharedJSON(appGroupIdentifier: CommonConstants.appGroupIdentifier, path: CommonConstants.demoContentPokemonJSON)
+    fileprivate let sharedPNG = SharedPNG(appGroupIdentifier: CommonConstants.appGroupIdentifier, path: CommonConstants.demoContentPokemonImage)
 
-    @IBOutlet weak var todayContent: UITextView!
-    
-    @IBAction func displayContentTapped(_ sender: UIButton) {
+    @IBOutlet weak var pokemonImage: UIImageView?
+    @IBOutlet weak var pokemonSpecies: UILabel?
 
-        todayWidgetContent.text = todayContent.text
+    @IBAction func fetchPokemon(_ sender: UIButton) {
+
+        PokeManager.fetchRandomPokemon { success in
+
+            NCWidgetController().setHasContent(
+                success,
+                forWidgetWithBundleIdentifier: CommonConstants.widgetBundleIdentifier
+            )
+        }
     }
 
     override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
 
-        todayContent.text = todayWidgetContent.text
+        super.viewDidLoad()
+
+        // Do any additional setup after loading the view.
+        registerForNotifications()
     }
 
 
+}
+
+extension ViewController {
+
+    func registerForNotifications() {
+
+        NotificationCenter.default.addObserver(
+            forName: .newPokemonFetched,
+            object: nil,
+            queue: nil) { (notification) in
+
+                print("notification received")
+                if let userInfo = notification.userInfo,
+                    let pokemon = userInfo["pokemon"] as? Pokemon,
+                    let image = userInfo["image"] as? UIImage {
+
+                    print(pokemon.species.name)
+                    self.updateWithPokemon(pokemon, and: image)
+                }
+        }
+    }
+
+    func updateWithPokemon(_ pokemon: Pokemon, and image: UIImage) {
+
+        DispatchQueue.main.async {
+
+            self.pokemonSpecies?.text = pokemon.species.name
+            self.pokemonImage?.image = image
+        }
+    }
 }
 
