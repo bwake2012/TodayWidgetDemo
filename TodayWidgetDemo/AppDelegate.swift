@@ -72,6 +72,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         fetchRandomPokemon() { success in
 
+            NCWidgetController().setHasContent(
+                true,
+                forWidgetWithBundleIdentifier: CommonConstants.widgetBundleIdentifier
+            )
+
             completionHandler(success ? .newData : .failed)
         }
     }
