@@ -46,6 +46,12 @@
                                     <action selector="fetchPokemon:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Wp4-0q-ctO"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pkm-fM-Mhz">
+                                <rect key="frame" x="20" y="841.5" width="374" height="20.5"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -53,6 +59,7 @@
                             <constraint firstItem="XdF-yB-3SH" firstAttribute="top" secondItem="OiG-Rs-EPZ" secondAttribute="bottom" constant="8" symbolic="YES" id="BJN-gq-e43"/>
                             <constraint firstAttribute="trailingMargin" secondItem="OiG-Rs-EPZ" secondAttribute="trailing" id="FLN-0v-Gfr"/>
                             <constraint firstAttribute="trailingMargin" secondItem="XdF-yB-3SH" secondAttribute="trailing" id="FOd-P7-tYK"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Pkm-fM-Mhz" secondAttribute="trailing" id="Gyn-qV-vJu"/>
                             <constraint firstAttribute="trailingMargin" secondItem="qOi-SN-sAD" secondAttribute="trailing" id="HQE-V0-qFW"/>
                             <constraint firstItem="qOi-SN-sAD" firstAttribute="top" secondItem="XdF-yB-3SH" secondAttribute="bottom" constant="8" symbolic="YES" id="SyP-fv-xVf"/>
                             <constraint firstItem="OiG-Rs-EPZ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="XY6-zQ-wmL"/>
@@ -61,11 +68,14 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Doj-Ci-atc" secondAttribute="trailing" id="hnk-l5-8Fw"/>
                             <constraint firstItem="qOi-SN-sAD" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="hwb-ve-6pY"/>
                             <constraint firstItem="XdF-yB-3SH" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="ieZ-p4-2rC"/>
+                            <constraint firstItem="Pkm-fM-Mhz" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="nia-X8-759"/>
                             <constraint firstItem="Doj-Ci-atc" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="waF-U7-vPW"/>
+                            <constraint firstItem="Pkm-fM-Mhz" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="ysL-7b-C8d"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="appStatus" destination="Pkm-fM-Mhz" id="FcG-ns-RDA"/>
                         <outlet property="pokemonImage" destination="XdF-yB-3SH" id="T8X-nu-12H"/>
                         <outlet property="pokemonSpecies" destination="qOi-SN-sAD" id="e4C-R6-R1I"/>
                     </connections>

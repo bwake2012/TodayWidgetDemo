@@ -12,20 +12,20 @@ import NotificationCenter
 
 class ViewController: UIViewController {
 
-    fileprivate let sharedJSON = SharedJSON(appGroupIdentifier: CommonConstants.appGroupIdentifier, path: CommonConstants.demoContentPokemonJSON)
-    fileprivate let sharedPNG = SharedPNG(appGroupIdentifier: CommonConstants.appGroupIdentifier, path: CommonConstants.demoContentPokemonImage)
+    fileprivate static let sharedJSON = SharedJSON(appGroupIdentifier: CommonConstants.appGroupIdentifier, path: CommonConstants.demoContentPokemonJSON)
+    fileprivate static let sharedPNG = SharedPNG(appGroupIdentifier: CommonConstants.appGroupIdentifier, path: CommonConstants.demoContentPokemonImage)
 
+    @IBOutlet weak var appStatus: UILabel?
     @IBOutlet weak var pokemonImage: UIImageView?
     @IBOutlet weak var pokemonSpecies: UILabel?
 
     @IBAction func fetchPokemon(_ sender: UIButton) {
 
-        PokeManager.fetchRandomPokemon { success in
+        let appDelegate = UIApplication.shared.delegate as? AppDelegate
 
-            NCWidgetController().setHasContent(
-                success,
-                forWidgetWithBundleIdentifier: CommonConstants.widgetBundleIdentifier
-            )
+        appDelegate?.fetchRandomPokemon { success in
+
+            print("Pokemon \(success ? "" : "not ")fetched!")
         }
     }
 
@@ -35,9 +35,23 @@ class ViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         registerForNotifications()
+
+        let result: Result<Pokemon, Error> = Self.sharedJSON.getObject()
+        switch result {
+        case .failure(let error):
+            print("Pokemon error: \(error.localizedDescription)")
+        case .success(let pokemon):
+            let imageResult = Self.sharedPNG.getImage()
+            switch imageResult {
+            case .failure(let error):
+                print("image error: \(error.localizedDescription)")
+            case .success(let image):
+                updateWithPokemon(pokemon, and: image)
+            }
+        }
+
+        appStatus?.text = "Background Refresh Status: " + UIApplication.shared.backgroundRefreshStatus.description
     }
-
-
 }
 
 extension ViewController {
@@ -49,13 +63,16 @@ extension ViewController {
             object: nil,
             queue: nil) { (notification) in
 
-                print("notification received")
-                if let userInfo = notification.userInfo,
-                    let pokemon = userInfo["pokemon"] as? Pokemon,
-                    let image = userInfo["image"] as? UIImage {
+                DispatchQueue.main.async {
 
-                    print(pokemon.species.name)
-                    self.updateWithPokemon(pokemon, and: image)
+                    print("notification received")
+                    if let userInfo = notification.userInfo,
+                        let pokemon = userInfo["pokemon"] as? Pokemon,
+                        let image = userInfo["image"] as? UIImage {
+
+                        print(pokemon.species.name)
+                        self.updateWithPokemon(pokemon, and: image)
+                    }
                 }
         }
     }
@@ -70,3 +87,20 @@ extension ViewController {
     }
 }
 
+extension UIBackgroundRefreshStatus {
+
+    var description: String {
+
+        switch self {
+
+        case .restricted:
+            return "restricted"
+        case .denied:
+            return "denied"
+        case .available:
+            return "available"
+        @unknown default:
+            return "unexpected status: \(self.rawValue)"
+        }
+    }
+}

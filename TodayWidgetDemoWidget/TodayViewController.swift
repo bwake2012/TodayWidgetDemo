@@ -12,10 +12,14 @@ import NotificationCenter
 class TodayViewController: UIViewController, NCWidgetProviding {
         
     @IBOutlet weak var pokemonSpeciesName: UILabel?
+    @IBOutlet weak var fetchDateTime: UILabel?
+    @IBOutlet weak var errorDescription: UILabel?
     @IBOutlet weak var pokemonImage: UIImageView?
 
     let sharedJSON = SharedJSON(appGroupIdentifier: CommonConstants.appGroupIdentifier, path: CommonConstants.demoContentPokemonJSON)
     let sharedPNG = SharedPNG(appGroupIdentifier: CommonConstants.appGroupIdentifier, path: CommonConstants.demoContentPokemonImage)
+
+    lazy var dateFormatter = ISO8601DateFormatter()
 
     @IBAction func didTap(_ sender: UITapGestureRecognizer) {
 
@@ -44,17 +48,29 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 
         let result: Result<Pokemon, Error> = sharedJSON.getObject()
         switch result {
-        case .failure(_):
-            break
+        case .failure(let error):
+            errorDescription?.text = "Pokemon error: \(error.localizedDescription)"
         case .success(let pokemon):
             pokemonSpeciesName?.text = pokemon.species.name
             completionResult = oldText != pokemon.species.name
             let result = sharedPNG.getImage()
             switch result {
-            case .failure(_):
-                break
+            case .failure(let error):
+                errorDescription?.text = "Image error: \(error.localizedDescription)"
             case .success(let image):
                 pokemonImage?.image = image
+                let result = sharedJSON.metadata()
+                switch result {
+                case .failure(let error):
+                    errorDescription?.text = "Metadata error: \(error.localizedDescription)"
+                case .success(let attributes):
+                    guard let date = attributes[.modificationDate] as? Date
+                    else {
+                        break
+                    }
+                    fetchDateTime?.text = dateFormatter.string(from: date)
+                    errorDescription?.text = nil
+                }
             }
         }
 

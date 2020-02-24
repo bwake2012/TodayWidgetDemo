@@ -118,7 +118,7 @@ struct SharedData {
 
             do {
 
-                attributes = try FileManager.default.attributesOfItem(atPath: url.absoluteString)
+                attributes = try FileManager.default.attributesOfItem(atPath: url.path)
 
             } catch {
 
