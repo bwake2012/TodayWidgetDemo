@@ -26,6 +26,8 @@
 		<dict>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>net.cockleburr.TodayWidgetDemo</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>todayWidgetDemo</string>

@@ -8,9 +8,9 @@
 
 import UIKit
 
-typealias PokemonResult = Result<Pokemon, Error>
 typealias ImageResult = Result<UIImage, Error>
 
 typealias FileDownloadResult = Result<URL, Error>
+
 
 typealias PokemonCompletion = (Result<(Pokemon, UIImage), Error>) -> Void

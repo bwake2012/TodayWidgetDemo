@@ -1,5 +1,5 @@
 //
-//  PokemonImageDownloader.swift
+//  ImageDownloader.swift
 //  TodayWidgetDemo
 //
 //  Created by Bob Wakefield on 2/29/20.
@@ -9,17 +9,13 @@
 import UIKit
 import NotificationCenter
 
-class PokemonImageDownloader: NSObject {
+class ImageDownloader: NSObject {
+
+    typealias ImageResult = Result<UIImage, Error>
+    typealias ImageCompletion = (ImageResult) -> Void
 
     fileprivate var retriever: BackgroundRetriever?
-    fileprivate var fetchCompletion: PokemonCompletion?
-    fileprivate var pokemon =
-        Pokemon(
-            species: Pokemon.Species(name: ""),
-            sprites: Pokemon.Sprites(
-                backDefault: nil, backShiny: nil, frontDefault: nil, frontShiny: nil
-            )
-        )
+    fileprivate var fetchCompletion: ImageCompletion?
 
     override init() {
 
@@ -28,20 +24,15 @@ class PokemonImageDownloader: NSObject {
         retriever = BackgroundRetriever(with: "ImageRetriever", and: self)
     }
 
-    func fetchImage(for pokemon: Pokemon, completion: @escaping PokemonCompletion) {
-
-        guard let imageURL = pokemon.sprites.frontDefault else {
-            return
-        }
+    func fetchImage(from imageURL: URL, completion: @escaping ImageCompletion) {
 
         self.fetchCompletion = completion
-        self.pokemon = pokemon
 
         retriever?.download(from: imageURL, after: 0)
     }
 }
 
-extension PokemonImageDownloader: RetrieverDelegate {
+extension ImageDownloader: RetrieverDelegate {
 
     func downloadComplete(result: FileDownloadResult) {
 
@@ -51,19 +42,13 @@ extension PokemonImageDownloader: RetrieverDelegate {
             fetchCompletion?(.failure(error))
         case .success(let fileURL):
             let result = loadImage(from: fileURL)
-            switch result {
-            case .failure(let error):
-                print("image load error: \(error.localizedDescription)")
-                fetchCompletion?(.failure(error))
-            case .success(let image):
 
-                fetchCompletion?(.success((pokemon, image)))
-             }
+            fetchCompletion?(result)
         }
     }
 }
 
-extension PokemonImageDownloader {
+extension ImageDownloader {
 
     func loadImage(from fileURL: URL) -> ImageResult {
 
@@ -72,7 +57,7 @@ extension PokemonImageDownloader {
 
             guard let image = UIImage(data: data) else {
 
-                return .failure(PokemonFetchError.dataToImage)
+                return .failure(ObjectFetchError.dataToImage)
             }
 
             return .success(image)

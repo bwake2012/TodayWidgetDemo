@@ -28,7 +28,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    var pokemonDownloader: PokemonDownloader?
+    var pokemonDownloader: CodableObjectDownloader<Pokemon>?
+    var pokemonImageDownloader: ImageDownloader?
 
     func application(
             _ application: UIApplication,
@@ -36,9 +37,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ) -> Bool {
 
         // Override point for customization after application launch.
-        let pokemonImageDownloader = PokemonImageDownloader()
-
-        pokemonDownloader = PokemonDownloader(with: pokemonImageDownloader)
+        self.pokemonImageDownloader = ImageDownloader()
+        self.pokemonDownloader = CodableObjectDownloader()
 
         application.setMinimumBackgroundFetchInterval(backgroundFetchInterval)
         print("Background fetch interval: \(backgroundFetchInterval) seconds.")
@@ -100,31 +100,45 @@ extension AppDelegate {
 
         let randomPoke = (1...151).randomElement() ?? 1
 
-        pokemonDownloader?.fetchPokemon(from: buildURL(id: randomPoke)) { result in
+        pokemonDownloader?.fetchObject(from: buildURL(id: randomPoke)) { result in
 
             var success = false
             switch result {
             case .failure(let error):
                 print("pokemon fetch error: \(error.localizedDescription)")
-            case .success(let (pokemon, image)):
-                success = true
+            case .success(let pokemon):
                 _ = self.sharedPNG.remove()
                 _ = self.sharedJSON.saveObject(pokemon)
-                _ = self.sharedPNG.saveImage(image)
 
-                let userInfo: [String: Any] = ["pokemon": pokemon, "image": image]
+                guard let imageURL = pokemon.sprites.frontDefault else {
+                    completionHandler(false)
+                    break
+                }
 
-                NotificationCenter.default.post(name: .newPokemonFetched, object: nil, userInfo: userInfo)
+                self.pokemonImageDownloader?.fetchImage(from: imageURL) { result in
 
-                print("Pokemon \(pokemon.species.name) fetched!")
+                    switch result {
+                    case .failure(let error):
+                        print("image fetch error: \(error.localizedDescription)")
+                    case .success(let image):
+                        _ = self.sharedPNG.saveImage(image)
+
+                        let userInfo: [String: Any] = ["pokemon": pokemon, "image": image]
+
+                        NotificationCenter.default.post(name: .newPokemonFetched, object: nil, userInfo: userInfo)
+
+                        print("Pokemon \(pokemon.species.name) fetched!")
+                        success = true
+                    }
+
+                    NCWidgetController().setHasContent(
+                        success,
+                        forWidgetWithBundleIdentifier: CommonConstants.widgetBundleIdentifier
+                    )
+
+                    completionHandler(success)
+                }
             }
-
-            NCWidgetController().setHasContent(
-                success,
-                forWidgetWithBundleIdentifier: CommonConstants.widgetBundleIdentifier
-            )
-
-            completionHandler(success)
         }
     }
 }

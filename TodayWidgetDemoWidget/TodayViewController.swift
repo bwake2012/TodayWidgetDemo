@@ -19,11 +19,18 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     let sharedJSON = SharedJSON(appGroupIdentifier: CommonConstants.appGroupIdentifier, path: CommonConstants.demoContentPokemonJSON)
     let sharedPNG = SharedPNG(appGroupIdentifier: CommonConstants.appGroupIdentifier, path: CommonConstants.demoContentPokemonImage)
 
-    lazy var dateFormatter = ISO8601DateFormatter()
+    fileprivate lazy var dateTimeFormatter: DateFormatter = {
+
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        formatter.timeStyle = .short
+
+        return formatter
+    }()
 
     @IBAction func didTap(_ sender: UITapGestureRecognizer) {
 
-        guard let url = URL(string: "todayWidgetDemo://home") else {
+        guard let url = URL(string: CommonConstants.todayWidgetDemoURL) else {
             return
         }
 
@@ -68,7 +75,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
                     else {
                         break
                     }
-                    fetchDateTime?.text = dateFormatter.string(from: date)
+                    fetchDateTime?.text = dateTimeFormatter.string(from: date)
                     errorDescription?.text = nil
                 }
             }

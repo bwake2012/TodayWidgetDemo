@@ -12,6 +12,7 @@ struct CommonConstants {
 
     static let widgetBundleIdentifier = "net.cockleburr.TodayWidgetDemo.TodayWidgetDemoWidget"
     static let appGroupIdentifier     = "group.net.cockleburr.TodayWidgetDemo"
+    static let todayWidgetDemoURL     = "todayWidgetDemo://home"
 
     static let demoContentFile       = "demoContentFile.txt"
     static let demoContentObjectFile = "demoContentObjectFile.archive"

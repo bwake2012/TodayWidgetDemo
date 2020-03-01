@@ -8,17 +8,18 @@
 
 import Foundation
 
-enum PokemonFetchError: Error {
+enum ObjectFetchError: Error {
+
     case dataToImage
-    case jsonToPokemon
+    case jsonToObject
 
     var localizedDescription: String {
 
         switch self {
         case .dataToImage:
             return "Unable to convert data to image."
-        case .jsonToPokemon:
-            return "Unable to load Pokemon from json."
+        case .jsonToObject:
+            return "Unable to load Object from json."
         }
     }
 }
