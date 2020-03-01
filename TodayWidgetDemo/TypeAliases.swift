@@ -6,8 +6,11 @@
 //  Copyright © 2020 Cockleburr Software. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
-typealias DownloadProgressUpdateHandler = (Double) -> Void
-typealias DownloadCompletionHandler = (URL) -> Void
+typealias PokemonResult = Result<Pokemon, Error>
+typealias ImageResult = Result<UIImage, Error>
 
+typealias FileDownloadResult = Result<URL, Error>
+
+typealias PokemonCompletion = (Result<(Pokemon, UIImage), Error>) -> Void

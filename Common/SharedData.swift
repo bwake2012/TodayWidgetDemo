@@ -90,7 +90,7 @@ struct SharedData {
         fileCoordinator.coordinate(writingItemAt: contentURL, options: [], error: &coordinatorError) { url in
 
             do {
-                try data.write(to: url, options: [])
+                try data.write(to: url, options: [.noFileProtection])
             }
             catch {
                 writeError = error

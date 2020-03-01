@@ -70,8 +70,7 @@ extension ViewController {
                         let pokemon = userInfo["pokemon"] as? Pokemon,
                         let image = userInfo["image"] as? UIImage {
 
-                        print(pokemon.species.name)
-                        self.updateWithPokemon(pokemon, and: image)
+                         self.updateWithPokemon(pokemon, and: image)
                     }
                 }
         }

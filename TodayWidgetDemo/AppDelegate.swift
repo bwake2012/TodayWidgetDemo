@@ -11,44 +11,24 @@ import BackgroundTasks
 import NotificationCenter
 
 #if DEBUG
-// as often as possible, for debugging
-fileprivate let backgroundFetchInterval = UIApplication.backgroundFetchIntervalMinimum
+// every 2 minutes, for debugging
+fileprivate let backgroundFetchInterval = TimeInterval(integerLiteral: 60 * 2)
 #else
-// every 5 minutes
-fileprivate let backgroundFetchInterval = TimeInterval(integerLiteral: 60 * 5)
+// every 30 minutes
+fileprivate let backgroundFetchInterval = TimeInterval(integerLiteral: 60 * 30)
 #endif
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    typealias DownloadResult = Result<URL, Error>
-    typealias DownloadCompletion = (DownloadResult) -> Void
-    typealias ImageResult = Result<UIImage, Error>
-    typealias ImageCompletion = (ImageResult) -> Void
-    typealias PokemonResult = Result<Pokemon, Error>
-    typealias PokemonCompletion = (PokemonResult) -> Void
-
-    enum PokemonFetchError: Error {
-        case dataToImage
-        case jsonToPokemon
-
-        var localizedDescription: String {
-
-            switch self {
-            case .dataToImage:
-                return "Unable to convert data to image."
-            case .jsonToPokemon:
-                return "Unable to load Pokemon from json."
-            }
-        }
-    }
+    fileprivate let sharedJSON = SharedJSON(appGroupIdentifier: CommonConstants.appGroupIdentifier, path: CommonConstants.demoContentPokemonJSON)
+    fileprivate let sharedPNG = SharedPNG(appGroupIdentifier: CommonConstants.appGroupIdentifier, path: CommonConstants.demoContentPokemonImage)
 
     var backgroundCompletionHandler: (() -> Void)?
 
     var window: UIWindow?
 
-    fileprivate let sharedJSON = SharedJSON(appGroupIdentifier: CommonConstants.appGroupIdentifier, path: CommonConstants.demoContentPokemonJSON)
-    fileprivate let sharedPNG = SharedPNG(appGroupIdentifier: CommonConstants.appGroupIdentifier, path: CommonConstants.demoContentPokemonImage)
+    var pokemonDownloader: PokemonDownloader?
 
     func application(
             _ application: UIApplication,
@@ -56,28 +36,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ) -> Bool {
 
         // Override point for customization after application launch.
+        let pokemonImageDownloader = PokemonImageDownloader()
+
+        pokemonDownloader = PokemonDownloader(with: pokemonImageDownloader)
+
         application.setMinimumBackgroundFetchInterval(backgroundFetchInterval)
+        print("Background fetch interval: \(backgroundFetchInterval) seconds.")
 
         return true
     }
 
+    func applicationWillEnterForeground(_ application: UIApplication) {
+
+        print("Will Enter Foreground")
+    }
+
     func applicationDidEnterBackground(_ application: UIApplication) {
 
-        print("Entering Background")
+        print("Did Enter Background")
     }
 
     func application(
             _ application: UIApplication,
             performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
 
+        print("Background fetch begins")
         fetchRandomPokemon() { success in
 
-            NCWidgetController().setHasContent(
-                true,
-                forWidgetWithBundleIdentifier: CommonConstants.widgetBundleIdentifier
-            )
-
             completionHandler(success ? .newData : .failed)
+
+            print("background fetch \(success ? "succeeded" : "failed")")
         }
     }
 }
@@ -88,6 +76,7 @@ extension AppDelegate {
                      handleEventsForBackgroundURLSession identifier: String,
                      completionHandler: @escaping () -> Void) {
 
+        print("Handle events for background URL session: \(identifier)")
         backgroundCompletionHandler = completionHandler
     }
 }
@@ -110,149 +99,33 @@ extension AppDelegate {
     func fetchRandomPokemon(completionHandler: @escaping (Bool) -> Void) {
 
         let randomPoke = (1...151).randomElement() ?? 1
-        print("Background Fetch \(randomPoke) started...")
 
-        fetchPokemon(id: randomPoke, completionHandler: completionHandler)
+        pokemonDownloader?.fetchPokemon(from: buildURL(id: randomPoke)) { result in
 
-        print("Background Fetch returns...")
-    }
-
-    func fetchPokemon(id pokemonID: Int, completionHandler: @escaping (Bool) -> Void) {
-
-        let url = buildURL(id: pokemonID)
-
-        fetchPokemon(from: url) { result in
-
+            var success = false
             switch result {
             case .failure(let error):
-                let errorDescription = error.localizedDescription
-                print("Background fetch failed: \(errorDescription)")
-                completionHandler(false)
-            case .success(let pokemon):
-                guard let imageURL = pokemon.sprites.frontDefault else {
-                    completionHandler(false)
-                    return
-                }
-
+                print("pokemon fetch error: \(error.localizedDescription)")
+            case .success(let (pokemon, image)):
+                success = true
                 _ = self.sharedPNG.remove()
                 _ = self.sharedJSON.saveObject(pokemon)
+                _ = self.sharedPNG.saveImage(image)
 
-                self.fetchImage(from: imageURL) { result in
+                let userInfo: [String: Any] = ["pokemon": pokemon, "image": image]
 
-                    switch result {
-                    case .failure(_):
-                        completionHandler(false)
-                        return
-                    case .success(let image):
-                        _ = self.sharedPNG.saveImage(image)
+                NotificationCenter.default.post(name: .newPokemonFetched, object: nil, userInfo: userInfo)
 
-                        DispatchQueue.main.async {
-
-                            guard
-                                .background != UIApplication.shared.applicationState
-                                else { return }
-
-                            NotificationCenter.default.post(
-                                name: .newPokemonFetched,
-                                object: self,
-                                userInfo: ["pokemon": pokemon, "image": image]
-                            )
-                        }
-                        completionHandler(true)
-                    }
-                }
-            }
-        }
-    }
-
-    func fetchPokemon(from url: URL, completion: @escaping PokemonCompletion) {
-
-        fetchFile(from: url) { result in
-
-            switch result {
-            case .failure(let error):
-                completion(.failure(error))
-            case .success(let fileURL):
-                completion(self.loadPokemon(from: fileURL))
+                print("Pokemon \(pokemon.species.name) fetched!")
             }
 
+            NCWidgetController().setHasContent(
+                success,
+                forWidgetWithBundleIdentifier: CommonConstants.widgetBundleIdentifier
+            )
+
+            completionHandler(success)
         }
-    }
-
-    func loadPokemon(from url: URL) -> PokemonResult {
-
-        do {
-            let data = try Data(contentsOf: url, options: [])
-
-            let jsonDecoder = JSONDecoder()
-            let pokemon = try jsonDecoder.decode(Pokemon.self, from: data)
-
-            return .success(pokemon)
-
-        } catch {
-            print("Pokemon JSON: \(error.localizedDescription)")
-            return .failure(error)
-        }
-    }
-
-    func fetchImage(from url: URL, completion: @escaping ImageCompletion) {
-
-        fetchFile(from: url) { result in
-
-            switch result {
-            case .failure(let error):
-                completion(.failure(error))
-            case .success(let fileURL):
-                completion(self.loadImage(from: fileURL))
-            }
-        }
-    }
-
-    func loadImage(from fileURL: URL) -> ImageResult {
-
-        do {
-            let data = try Data(contentsOf: fileURL, options: [])
-
-            guard let image = UIImage(data: data) else {
-
-                return .failure(PokemonFetchError.dataToImage)
-            }
-
-            return .success(image)
-
-        } catch {
-
-            return .failure(error)
-        }
-    }
-
-    func display(_ pokemon: Pokemon?) {
-
-        guard let pokemon = pokemon else { return }
-
-        DispatchQueue.main.async {
-
-            _ = self.sharedPNG.remove()
-            _ = self.sharedJSON.saveObject(pokemon)
-        }
-    }
-
-    func fetchFile(from url: URL, with completion: @escaping DownloadCompletion) {
-
-        let session = URLSession.shared
-        let task = session.downloadTask(with: url) { fileURL, response, error in
-
-            if let fileURL = fileURL {
-
-                completion(.success(fileURL))
-
-            } else if let error = error {
-
-                completion(.failure(error))
-
-            }
-        }
-        task.resume()
     }
 }
 

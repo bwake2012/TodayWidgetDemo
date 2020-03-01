@@ -21,6 +21,11 @@
 		C4068F3D23D56375006A784B /* SharedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4068F3123D54895006A784B /* SharedData.swift */; };
 		C4068F3E23D56375006A784B /* SharedJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4068F2E23D54895006A784B /* SharedJSON.swift */; };
 		C4068F3F23D5641C006A784B /* Pokemon.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4068F2A23D516DC006A784B /* Pokemon.swift */; };
+		C4141534240ACBCD00AB92C2 /* BackgroundRetriever.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4141532240A028F00AB92C2 /* BackgroundRetriever.swift */; };
+		C4141535240ACC6400AB92C2 /* Retriever.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4141530240A026900AB92C2 /* Retriever.swift */; };
+		C4141538240AD22C00AB92C2 /* PokemonDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4141537240AD22C00AB92C2 /* PokemonDownloader.swift */; };
+		C414153A240AD2BE00AB92C2 /* PokemonImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4141539240AD2BE00AB92C2 /* PokemonImageDownloader.swift */; };
+		C414153C240ADAF500AB92C2 /* AppErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = C414153B240ADAF500AB92C2 /* AppErrors.swift */; };
 		C4AA83C723F86208002649FD /* TypeAliases.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AA83C623F86208002649FD /* TypeAliases.swift */; };
 		C4D1C73A23C0F6B100F31911 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D1C73923C0F6B100F31911 /* AppDelegate.swift */; };
 		C4D1C73C23C0F6B100F31911 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D1C73B23C0F6B100F31911 /* SceneDelegate.swift */; };
@@ -74,6 +79,11 @@
 		C4068F3023D54895006A784B /* ObjectSharedProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectSharedProtocol.swift; sourceTree = "<group>"; };
 		C4068F3123D54895006A784B /* SharedData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedData.swift; sourceTree = "<group>"; };
 		C4068F3723D54F7B006A784B /* SharedPNG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedPNG.swift; sourceTree = "<group>"; };
+		C4141530240A026900AB92C2 /* Retriever.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Retriever.swift; sourceTree = "<group>"; };
+		C4141532240A028F00AB92C2 /* BackgroundRetriever.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundRetriever.swift; sourceTree = "<group>"; };
+		C4141537240AD22C00AB92C2 /* PokemonDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonDownloader.swift; sourceTree = "<group>"; };
+		C4141539240AD2BE00AB92C2 /* PokemonImageDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonImageDownloader.swift; sourceTree = "<group>"; };
+		C414153B240ADAF500AB92C2 /* AppErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppErrors.swift; sourceTree = "<group>"; };
 		C4AA83C623F86208002649FD /* TypeAliases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeAliases.swift; sourceTree = "<group>"; };
 		C4D1C73623C0F6B100F31911 /* Today Widget Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Today Widget Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4D1C73923C0F6B100F31911 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -129,6 +139,24 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		C414152F240A025800AB92C2 /* Retriever */ = {
+			isa = PBXGroup;
+			children = (
+				C4141530240A026900AB92C2 /* Retriever.swift */,
+				C4141532240A028F00AB92C2 /* BackgroundRetriever.swift */,
+			);
+			path = Retriever;
+			sourceTree = "<group>";
+		};
+		C4141536240AD21100AB92C2 /* Downloaders */ = {
+			isa = PBXGroup;
+			children = (
+				C4141537240AD22C00AB92C2 /* PokemonDownloader.swift */,
+				C4141539240AD2BE00AB92C2 /* PokemonImageDownloader.swift */,
+			);
+			path = Downloaders;
+			sourceTree = "<group>";
+		};
 		C4D1C72D23C0F6B100F31911 = {
 			isa = PBXGroup;
 			children = (
@@ -154,6 +182,8 @@
 		C4D1C73823C0F6B100F31911 /* TodayWidgetDemo */ = {
 			isa = PBXGroup;
 			children = (
+				C4141536240AD21100AB92C2 /* Downloaders */,
+				C414152F240A025800AB92C2 /* Retriever */,
 				C4AA83C623F86208002649FD /* TypeAliases.swift */,
 				C4068F2823D516CB006A784B /* Model */,
 				C4D1C77123C1007B00F31911 /* TodayWidgetDemo.entitlements */,
@@ -164,6 +194,7 @@
 				C4D1C74223C0F6B500F31911 /* Assets.xcassets */,
 				C4D1C74423C0F6B500F31911 /* LaunchScreen.storyboard */,
 				C4D1C74723C0F6B500F31911 /* Info.plist */,
+				C414153B240ADAF500AB92C2 /* AppErrors.swift */,
 			);
 			path = TodayWidgetDemo;
 			sourceTree = "<group>";
@@ -341,14 +372,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C4141534240ACBCD00AB92C2 /* BackgroundRetriever.swift in Sources */,
 				C4D1C73E23C0F6B100F31911 /* ViewController.swift in Sources */,
 				C4068F3523D54895006A784B /* ObjectSharedProtocol.swift in Sources */,
 				C4068F3223D54895006A784B /* SharedArchive.swift in Sources */,
 				C4D1C73A23C0F6B100F31911 /* AppDelegate.swift in Sources */,
 				C4068F3323D54895006A784B /* SharedJSON.swift in Sources */,
+				C4141535240ACC6400AB92C2 /* Retriever.swift in Sources */,
 				C4068F2C23D516DC006A784B /* Pokemon.swift in Sources */,
+				C414153C240ADAF500AB92C2 /* AppErrors.swift in Sources */,
+				C4141538240AD22C00AB92C2 /* PokemonDownloader.swift in Sources */,
 				C4068F3823D54F7B006A784B /* SharedPNG.swift in Sources */,
 				C4D1C73C23C0F6B100F31911 /* SceneDelegate.swift in Sources */,
+				C414153A240AD2BE00AB92C2 /* PokemonImageDownloader.swift in Sources */,
 				C4068F3423D54895006A784B /* CommonConstants.swift in Sources */,
 				C4068F3623D54895006A784B /* SharedData.swift in Sources */,
 				C4AA83C723F86208002649FD /* TypeAliases.swift in Sources */,
