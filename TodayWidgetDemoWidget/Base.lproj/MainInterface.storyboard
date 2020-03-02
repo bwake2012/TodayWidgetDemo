@@ -12,7 +12,7 @@
         <scene sceneID="cwh-vc-ff4">
             <objects>
                 <viewController id="M4Y-Lb-cyx" customClass="TodayViewController" customModule="Today_Widget_Demo_Widget" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" ambiguous="YES" simulatedAppContext="notificationCenter" preservesSuperviewLayoutMargins="YES" id="S3S-Oj-5AN">
+                    <view key="view" contentMode="scaleToFill" simulatedAppContext="notificationCenter" preservesSuperviewLayoutMargins="YES" id="S3S-Oj-5AN">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="32"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -56,6 +56,9 @@
                             <constraint firstItem="Cq3-Y4-pAY" firstAttribute="top" secondItem="ssy-KU-ocm" secondAttribute="top" id="Vjw-VW-P59"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ssy-KU-ocm"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="nwe-re-29c" appends="YES" id="Or5-11-8xh"/>
+                        </connections>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -68,9 +71,9 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vXp-U4-Rya" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="UUj-ME-0me">
+                <tapGestureRecognizer id="nwe-re-29c">
                     <connections>
-                        <action selector="didTap:" destination="M4Y-Lb-cyx" id="oKd-Q4-AdN"/>
+                        <action selector="didTap:" destination="M4Y-Lb-cyx" id="jLf-JS-NTq"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
