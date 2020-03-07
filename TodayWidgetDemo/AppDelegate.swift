@@ -10,13 +10,8 @@ import UIKit
 import BackgroundTasks
 import NotificationCenter
 
-#if DEBUG
-// every 2 minutes, for debugging
-fileprivate let backgroundFetchInterval = TimeInterval(integerLiteral: 60 * 2)
-#else
-// every 30 minutes
-fileprivate let backgroundFetchInterval = TimeInterval(integerLiteral: 60 * 30)
-#endif
+// whenever the system sees fit.
+fileprivate let backgroundFetchInterval: TimeInterval = UIApplication.backgroundFetchIntervalMinimum
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
