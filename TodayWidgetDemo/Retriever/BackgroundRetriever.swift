@@ -73,6 +73,13 @@ extension BackgroundRetriever: URLSessionDownloadDelegate {
         delegate?.downloadComplete(result: .success(fileURL))
     }
 
+    func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
+
+        guard let error = error else { return }
+        print("download error: \(error.localizedDescription)")
+        delegate?.downloadComplete(result: .failure(error))
+    }
+
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
 
         guard totalBytesExpectedToWrite != NSURLSessionTransferSizeUnknown else {
