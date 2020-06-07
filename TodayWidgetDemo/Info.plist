@@ -2,11 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>BGTaskSchedulerPermittedIdentifiers</key>
-	<array>
-		<string>net.cockleburr.ModernBackgroundTasksDemoProcessing</string>
-		<string>net.cockleburr.TodayWidgetDemoModernBackgroundFetch</string>
-	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>fr_CA</string>
 	<key>CFBundleExecutable</key>

@@ -13,7 +13,7 @@ class CodableObjectDownloader<T: Decodable>: NSObject {
     typealias ObjectResult = Result<T, Error>
     typealias ObjectCompletion = (ObjectResult) -> Void
 
-    fileprivate var retriever: BackgroundRetriever?
+    fileprivate var retriever: Retriever?
 
     fileprivate var fetchCompletion: ObjectCompletion?
 

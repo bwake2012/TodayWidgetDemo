@@ -12,26 +12,34 @@ class BackgroundRetriever: NSObject, Retriever {
 
     weak var delegate: RetrieverDelegate?
 
-    private var backgroundURLSession: URLSession?
+    private var urlSession: URLSession?
 
     required init(with identifier: String, and delegate: RetrieverDelegate) {
+
+        #if false
+
+        let config = URLSessionConfiguration.ephemeral
+
+        #else
 
         let config = URLSessionConfiguration.background(withIdentifier: identifier)
         config.isDiscretionary = false
         config.sessionSendsLaunchEvents = true
 
+        #endif
+
         self.delegate = delegate
 
         super.init()
 
-        backgroundURLSession = URLSession(configuration: config, delegate: self, delegateQueue: nil)
+        urlSession = URLSession(configuration: config, delegate: self, delegateQueue: nil)
     }
 
     func download(
         from webURL: URL,
         after delay: TimeInterval) {
 
-        guard let task = backgroundURLSession?.downloadTask(with: webURL) else {
+        guard let task = urlSession?.downloadTask(with: webURL) else {
             preconditionFailure("backgroundURLSession is nil!")
         }
 

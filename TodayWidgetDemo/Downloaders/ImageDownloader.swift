@@ -14,7 +14,7 @@ class ImageDownloader: NSObject {
     typealias ImageResult = Result<UIImage, Error>
     typealias ImageCompletion = (ImageResult) -> Void
 
-    fileprivate var retriever: BackgroundRetriever?
+    fileprivate var retriever: Retriever?
     fileprivate var fetchCompletion: ImageCompletion?
 
     override init() {
