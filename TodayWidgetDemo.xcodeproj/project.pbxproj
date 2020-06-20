@@ -85,6 +85,7 @@
 		C4141539240AD2BE00AB92C2 /* ImageDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownloader.swift; sourceTree = "<group>"; };
 		C414153B240ADAF500AB92C2 /* AppErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppErrors.swift; sourceTree = "<group>"; };
 		C4AA83C623F86208002649FD /* TypeAliases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeAliases.swift; sourceTree = "<group>"; };
+		C4BF81C5249E9457006AE3AF /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		C4D1C73623C0F6B100F31911 /* Today Widget Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Today Widget Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4D1C73923C0F6B100F31911 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C4D1C73B23C0F6B100F31911 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -160,6 +161,7 @@
 		C4D1C72D23C0F6B100F31911 = {
 			isa = PBXGroup;
 			children = (
+				C4BF81C5249E9457006AE3AF /* README.md */,
 				C4D1C77623C104BD00F31911 /* Common */,
 				C4D1C73823C0F6B100F31911 /* TodayWidgetDemo */,
 				C4D1C76323C0FEE300F31911 /* TodayWidgetDemoWidget */,
