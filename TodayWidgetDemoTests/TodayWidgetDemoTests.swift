@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import TodayWidgetDemo
+@testable import Today_Widget_Demo
 
 class TodayWidgetDemoTests: XCTestCase {
 

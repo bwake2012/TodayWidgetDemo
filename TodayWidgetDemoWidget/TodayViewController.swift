@@ -11,14 +11,26 @@ import NotificationCenter
 
 class TodayViewController: UIViewController, NCWidgetProviding {
         
-    @IBOutlet weak var todayContent: UITextView!
-    @IBOutlet weak var contentHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var pokemonSpeciesName: UILabel?
+    @IBOutlet weak var fetchDateTime: UILabel?
+    @IBOutlet weak var errorDescription: UILabel?
+    @IBOutlet weak var pokemonImage: UIImageView?
 
-    let content = TodayWidgetContent()
+    let sharedJSON = SharedJSON(appGroupIdentifier: CommonConstants.appGroupIdentifier, path: CommonConstants.demoContentPokemonJSON)
+    let sharedPNG = SharedPNG(appGroupIdentifier: CommonConstants.appGroupIdentifier, path: CommonConstants.demoContentPokemonImage)
+
+    fileprivate lazy var dateTimeFormatter: DateFormatter = {
+
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        formatter.timeStyle = .short
+
+        return formatter
+    }()
 
     @IBAction func didTap(_ sender: UITapGestureRecognizer) {
 
-        guard let url = URL(string: "todayWidgetDemo://home") else {
+        guard let url = URL(string: CommonConstants.todayWidgetDemoURL) else {
             return
         }
 
@@ -29,7 +41,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
 
-        todayContent.text = content.text
+
     }
         
     func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
@@ -38,21 +50,50 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         // If an error is encountered, use NCUpdateResult.Failed
         // If there's no update required, use NCUpdateResult.NoData
         // If there's an update, use NCUpdateResult.NewData
-        let oldText = todayContent.text
-        let newText = content.text
+        let oldText = pokemonSpeciesName?.text ?? ""
+        var completionResult = false
 
-        todayContent.text = newText
-        let contentSize = todayContent.sizeThatFits(CGSize(width: todayContent.bounds.width, height: CGFloat.greatestFiniteMagnitude))
-        self.preferredContentSize = contentSize
-        contentHeightConstraint.constant = contentSize.height
+        let result: Result<Pokemon, Error> = sharedJSON.getObject()
+        switch result {
+        case .failure(let error):
+            errorDescription?.text = "Pokemon error: \(error.localizedDescription)"
+        case .success(let pokemon):
+            pokemonSpeciesName?.text = pokemon.species.name
+            completionResult = oldText != pokemon.species.name
+            let result = sharedPNG.getImage()
+            switch result {
+            case .failure(let error):
+                errorDescription?.text = "Image error: \(error.localizedDescription)"
+            case .success(let image):
+                pokemonImage?.image = image
+                let result = sharedJSON.metadata()
+                switch result {
+                case .failure(let error):
+                    errorDescription?.text = "Metadata error: \(error.localizedDescription)"
+                case .success(let attributes):
+                    guard let date = attributes[.modificationDate] as? Date
+                    else {
+                        break
+                    }
+                    fetchDateTime?.text = dateTimeFormatter.string(from: date)
+                    errorDescription?.text = nil
+                }
+            }
+        }
 
-        completionHandler(newText != oldText ? NCUpdateResult.newData : NCUpdateResult.noData)
+        completionHandler(completionResult ? NCUpdateResult.newData : NCUpdateResult.noData)
     }
     
     func widgetActiveDisplayModeDidChange(_ activeDisplayMode: NCWidgetDisplayMode, withMaximumSize maxSize: CGSize) {
 
-        let contentSize = todayContent.sizeThatFits(CGSize(width: todayContent.bounds.width, height: CGFloat.greatestFiniteMagnitude))
+        switch activeDisplayMode {
 
-        self.preferredContentSize = contentSize
+        case .compact:
+            preferredContentSize = maxSize
+        case .expanded:
+            preferredContentSize = maxSize
+        @unknown default:
+            fatalError("Unexpected today widget active display mode")
+        }
     }
 }
