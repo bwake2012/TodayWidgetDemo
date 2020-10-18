@@ -78,7 +78,7 @@ extension ViewController {
 
         DispatchQueue.main.async {
 
-            self.pokemonSpecies?.text = pokemon?.species.name
+            self.pokemonSpecies?.text = pokemon?.species.name.capitalized ?? "Pokemon not retrieved."
             self.pokemonImage?.image = image
             if let date = date {
                 self.timestamp?.text = self.dateTimeFormatter.string(from: date)

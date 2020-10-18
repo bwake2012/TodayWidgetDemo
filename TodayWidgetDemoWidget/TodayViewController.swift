@@ -58,8 +58,9 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         case .failure(let error):
             errorDescription?.text = "Pokemon error: \(error.localizedDescription)"
         case .success(let pokemon):
-            pokemonSpeciesName?.text = pokemon.species.name
-            completionResult = oldText != pokemon.species.name
+            let newText = pokemon.species.name.capitalized
+            pokemonSpeciesName?.text = newText
+            completionResult = oldText != newText
             let result = sharedPNG.getImage()
             switch result {
             case .failure(let error):
