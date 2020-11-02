@@ -3,7 +3,6 @@
 //  TodayWidgetDemo
 //
 //  Created by Robert Wakefield on 1/13/20.
-//  Copyright © 2020 State Farm. All rights reserved.
 //
 
 import Foundation
